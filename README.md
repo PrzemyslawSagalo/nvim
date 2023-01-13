@@ -28,4 +28,4 @@
 |`Y`               | copy_path           | copy relative path to system clipboard |
 |`gy`              | copy_absolute_path  | copy absolute path to system clipboard |
 |`s`               | system_open         | open a file with default system application or a folder with default file manager, using |system_open| option |
-
+|:----------------:|:-------------------:|:-------------------------------------------------------------------------------------------------------------:|
