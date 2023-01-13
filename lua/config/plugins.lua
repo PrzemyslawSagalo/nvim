@@ -40,12 +40,22 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
+  -- UI
+  use 'folke/tokyonight.nvim'
+  use 'kyazdani42/nvim-web-devicons'
+
+  -- nvim tree
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
+
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use 'folke/tokyonight.nvim'
-  use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "preservim/tagbar" -- tag bar for code navigation 
 
@@ -66,6 +76,17 @@ return packer.startup(function(use)
   -- debuginf
   use "mfussenegger/nvim-dap"
   use "mfussenegger/nvim-dap-python"
+
+  -- telescope
+  use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        requires = { {'nvim-lua/plenary.nvim'},
+                     { "nvim-telescope/telescope-live-grep-args.nvim" },
+                   },
+        config = function()
+          require("telescope").load_extension("live_grep_args")
+  end
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
