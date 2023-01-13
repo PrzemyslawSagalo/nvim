@@ -6,8 +6,11 @@
 ```
 ## nvim-tree
 |`<CR>`            | edit                | open a file or folder; root will cd to the above directory |
+
 |`<C-v>`           | vsplit              | open the file in a vertical split |
+
 |`<C-x>`           | split               | open the file in a horizontal split | 
+
 |`<C-t>`           | tabnew              | open the file in a new tab |
 |`<`               | prev_sibling        | navigate to the previous sibling of current file/directory |
 |`>`               | next_sibling        | navigate to the next sibling of current file/directory |
@@ -28,4 +31,3 @@
 |`Y`               | copy_path           | copy relative path to system clipboard |
 |`gy`              | copy_absolute_path  | copy absolute path to system clipboard |
 |`s`               | system_open         | open a file with default system application or a folder with default file manager, using |system_open| option |
-|:----------------:|:-------------------:|:-------------------------------------------------------------------------------------------------------------:|
