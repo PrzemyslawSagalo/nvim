@@ -92,6 +92,8 @@ return packer.startup(function(use)
   -- debuginf
   use "mfussenegger/nvim-dap"
   use "mfussenegger/nvim-dap-python"
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use "theHamsta/nvim-dap-virtual-text"
 
   -- telescope
   use {
