@@ -109,6 +109,19 @@ return packer.startup(function(use)
   -- tree-sitter
   use { 'nvim-treesitter/nvim-treesitter', {run =  ':TSUpdate'} }
 
+  -- neotest
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-vim-test",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim"
+    }
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

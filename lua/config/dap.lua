@@ -12,4 +12,5 @@ dap.listeners.after.event_initialized["dapui_config"]=function()
 end
 
 require('dap-python').setup('~/venv/bin/python')
+require('dap-python').test_runner = 'pytest'
 require("dapui").setup()
