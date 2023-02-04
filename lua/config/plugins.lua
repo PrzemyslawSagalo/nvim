@@ -80,6 +80,7 @@ return packer.startup(function(use)
       {'rafamadriz/friendly-snippets'},
     }
   }
+  use "github/copilot.vim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin

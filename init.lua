@@ -8,4 +8,5 @@ require "config.lsp"
 require "config.dap"
 require "config.telescope"
 require "config.treesitter"
-require("config.neotest")
+require "config.neotest"
+require "config.copilot"
