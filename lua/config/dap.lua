@@ -1,8 +1,9 @@
-vim.keymap.set('n', '<leader>c', require 'dap'.continue)
-vim.keymap.set('n', '<leader>o', require 'dap'.step_over)
-vim.keymap.set('n', '<leader>dsi', require 'dap'.step_into)
-vim.keymap.set('n', '<leader>dso', require 'dap'.step_out)
+vim.keymap.set('n', '<leader>dc', require 'dap'.continue)
+vim.keymap.set('n', '<leader>do', require 'dap'.step_over)
+vim.keymap.set('n', '<leader>di', require 'dap'.step_into)
+vim.keymap.set('n', '<leader>du', require 'dap'.step_out)
 vim.keymap.set('n', '<leader>db', require 'dap'.toggle_breakpoint)
+vim.keymap.set('n', '<leader>dt', require 'dap'.terminate)
 
 vim.keymap.set('n', '<leader>dm', require 'dapui'.toggle)
 
