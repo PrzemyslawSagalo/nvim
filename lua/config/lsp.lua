@@ -8,7 +8,7 @@ lsp.ensure_installed({
   -- Replace these with whatever servers you want to install
   'tsserver',
   'eslint',
-  'sumneko_lua',
+  'lua_ls',
   'pyright'
 })
 
