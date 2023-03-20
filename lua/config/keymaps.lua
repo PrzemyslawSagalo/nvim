@@ -25,6 +25,11 @@ keymap("n", "<leader>j", "<C-w>j", opts)
 keymap("n", "<leader>k", "<C-w>k", opts)
 keymap("n", "<leader>l", "<C-w>l", opts)
 
+-- Copy and paste to and from a system clipboard
+keymap("n", "<leader>y", '"+y', opts)
+keymap("n", "<leader>p", '"+p', opts)
+keymap("n", "<leader>P", '"+P', opts)
+
 -- Resize with arrows
 keymap("n", "<leader><Up>", ":resize +2<CR>", opts)
 keymap("n", "<leader><Down>", ":resize -2<CR>", opts)
