@@ -12,6 +12,14 @@ dap.listeners.after.event_initialized["dapui_config"]=function()
   dapui.open()
 end
 
-require('dap-python').setup('~/venv/bin/python')
-require('dap-python').test_runner = 'pytest'
+function _G.load_project_dap_config()
+  local dap_config_path = vim.fn.getcwd() .. '/dap_config.lua'
+  if vim.fn.filereadable(dap_config_path) == 1 then
+    vim.cmd('luafile ' .. dap_config_path)
+    print('Loaded project-specific DAP configuration')
+  end
+end
+
+vim.cmd([[autocmd FileType python lua load_project_dap_config()]])
+
 require("dapui").setup()
