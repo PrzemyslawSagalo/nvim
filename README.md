@@ -51,7 +51,19 @@
 
 |`s`               | system_open         | open a file with default system application or a folder with default file manager, using |system_open| option |
 
+## Tabs and Buffers
+|`gt`              | next tab            | go to the next tab |
+|`gT`              | previous tab        | go to the previous tab |
+
 ## Telescope
 `:Telescope keymaps`
 
 ## Substitution
+```
+:[range]s/search/replace/[flags]
+```
+
+- `range`: (optional) a range of lines to apply the substitution, e.g., `1,5` for lines 1 to 5 or `%` for the entire file.
+- `search`: the string or pattern you want to search for.
+- `replace`: the string you want to replace the search string with.
+- `flags`: (optional) one or more flags to modify the behavior of the substitution, e.g., `g` for global (replace all occurrences in the specified range), `i` for case-insensitive search, `c` for confirm each substitution.

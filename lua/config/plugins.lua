@@ -126,6 +126,10 @@ return packer.startup(function(use)
   -- auto save
   use "Pocco81/auto-save.nvim"
 
+  -- buffer_line
+  use "akinsho/bufferline.nvim"
+  use "moll/vim-bbye"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
