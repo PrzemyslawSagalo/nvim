@@ -7,6 +7,7 @@ vim.keymap.set('n', '<leader>dt', require 'dap'.terminate)
 vim.keymap.set('n', '<leader>dk', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
 
 vim.keymap.set('n', '<leader>dm', require 'dapui'.toggle)
+vim.keymap.set('n', '<leader>df', ":lua require('dapui').float_element()<CR>")
 
 local dap, dapui = require("dap"), require("dapui")
 
@@ -43,10 +44,11 @@ dapui.setup(
     },
     layouts = { {
         elements = { {
-            id = "breakpoints",
-            size = 0.25
-          }, {
             id = "watches",
+            size = 0.5
+          },
+          {
+            id = "scopes",
             size = 0.5
           } },
         position = "left",
@@ -54,10 +56,7 @@ dapui.setup(
       }, {
         elements = { {
             id = "repl",
-            size = 0.5
-          }, {
-            id = "scopes",
-            size = 0.5
+            size = 1
           } },
         position = "bottom",
         size = 10
