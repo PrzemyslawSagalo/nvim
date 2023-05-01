@@ -88,5 +88,5 @@ function _G.load_project_dap_config()
   end
 end
 
-vim.cmd([[autocmd FileType python lua load_project_dap_config()]])
+vim.cmd([[autocmd FileType python,cpp lua load_project_dap_config()]])
 
