@@ -11,5 +11,4 @@ require "config.treesitter"
 require "config.neotest"
 require "config.copilot"
 require "config.bufferline"
-
-vim.api.nvim_set_keymap("n", "<leader>f", ":lua require('config.black').black_format()<CR>", {noremap = true, silent = true})
+require "config.cmake-tools"
