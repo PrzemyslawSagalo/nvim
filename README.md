@@ -35,12 +35,13 @@
 
 ## Tabs and Buffers
 
-| Key       | Action            | Description                                                       |
-|-----------|-------------------|-------------------------------------------------------------------|
-| `gt`      | next tab          | go to the next tab                                                |
-| `gT`      | previous tab      | go to the previous tab                                            |
-| `<S-l>`   | next buffer       | go to the next buffer                                             |
-| `<S-h>`   | previous buffer   | go to the previous buffer                                         |
+| Key                    | Action                                 |
+|------------------------|----------------------------------------|
+| `gt`                   | next tab                               |
+| `gT`                   | previous tab                           |
+| `<S-l>`                | next buffer                            |
+| `<S-h>`                | previous buffer                        |
+| `:bwipeout` or `:bw`   | delete and remove a buffer from a list |
 
 ## Telescope
 `:Telescope keymaps`
