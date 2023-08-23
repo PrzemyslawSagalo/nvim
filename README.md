@@ -57,6 +57,12 @@
 - `flags`: (optional) one or more flags to modify the behavior of the substitution, e.g., `g` for global (replace all occurrences in the specified range), `i` for case-insensitive search, `c` for confirm each substitution.
 
 ## Copying
-| Key       | Action              | Description                                                       |
-|-----------|---------------------|-------------------------------------------------------------------|
-| `"+y`     | copy to OS clipboard|                                                                   |
+| Key       | Action              |
+|-----------|---------------------|
+| `"+y`     | copy to OS clipboard|
+
+# tmux
+| Key        | Action                  |
+|------------|-------------------------|
+| `Ctrl-b [` | enable scrolling        |
+| `q`        | exit from scroling mode |
