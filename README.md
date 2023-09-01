@@ -1,4 +1,8 @@
-# nvim config 
+# NVIM CONFIGURATION
+
+## Architectural drivers
+* This is a standalone repository as it gives the possibility to: change, test and push.
+
 ## LSP
 ```lua
 -- Learn the keybindings, see :help lsp-zero-keybindings
