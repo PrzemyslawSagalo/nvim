@@ -53,7 +53,16 @@ return packer.startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+  -- Packer
   use "wbthomason/packer.nvim" -- Have packer manage itself
+
+  -- Mason
+  use "williamboman/mason.nvim"
+
+  -- Copilot
+  -- use "github/copilot.vim"
+
+  -- #TODO: to review
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
@@ -80,7 +89,6 @@ return packer.startup(function(use)
       {'rafamadriz/friendly-snippets'},
     }
   }
-  use "github/copilot.vim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -93,12 +101,12 @@ return packer.startup(function(use)
   -- debuginf
   use "mfussenegger/nvim-dap"
   use "mfussenegger/nvim-dap-python"
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use {"rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   use "theHamsta/nvim-dap-virtual-text"
 
   -- telescope
   use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim', tag = '0.1.2',
         requires = { {'nvim-lua/plenary.nvim'},
                      { "nvim-telescope/telescope-live-grep-args.nvim" },
                    },
@@ -130,6 +138,7 @@ return packer.startup(function(use)
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
 
+  -- C++
   use 'Civitasv/cmake-tools.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
