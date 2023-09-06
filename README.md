@@ -4,10 +4,9 @@
 * This is a standalone repository as it gives the possibility to: change, test and push.
 
 ## LSP
-```lua
--- Learn the keybindings, see :help lsp-zero-keybindings
--- Learn to configure LSP servers, see :help lsp-zero-api-showcase
-```
+| Key        | Action                   | 
+|------------|--------------------------|
+| `:LspInfo` | status of the lsp server |
 
 ## nvim-tree
 
