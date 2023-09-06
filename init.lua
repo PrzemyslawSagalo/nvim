@@ -1,16 +1,15 @@
-require "core.general_keymaps"
+require("core.general_keymaps")
 
-require "plugins.init"
-require "plugins.configs.autopairs"
-require "plugins.configs.bufferline"
-require "plugins.configs.cmake_tools"
-require "plugins.configs.cmp"
-require "plugins.configs.colorscheme"
-require "plugins.configs.dap"
-require "plugins.configs.lsp"
-require "plugins.configs.neotest"
-require "plugins.configs.telescope"
-require "plugins.configs.treesitter"
-require "plugins.configs.vim_options"
-require "plugins.configs.vim_tree"
+require("plugins.init")
+require("plugins.configs.autopairs")
+require("plugins.configs.bufferline")
+require("plugins.configs.cmake_tools")
+require("plugins.configs.colorscheme")
+require("plugins.configs.dap")
+require("plugins.configs.lsp")
+require("plugins.configs.neotest")
+require("plugins.configs.telescope")
+require("plugins.configs.treesitter")
+require("plugins.configs.vim_options")
+require("plugins.configs.vim_tree")
 
