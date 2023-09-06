@@ -24,32 +24,42 @@ local plugins = {
        require("nvim-tree").setup()
      end,
     },
-    {"williamboman/mason.nvim"},
+    -- mason
+    {"williamboman/mason.nvim",
+     config = function()
+       require("mason").setup()
+     end,
+    },
+    --
+    -- LSP
+    {'williamboman/mason-lspconfig.nvim'},
+    {'neovim/nvim-lspconfig'},
+    {"hrsh7th/cmp-nvim-lsp"},
+    --
     {"nvim-lua/popup.nvim"},
     {"nvim-lua/plenary.nvim"},
     {"windwp/nvim-autopairs"},
     {"preservim/tagbar"},
-    {"VonHeikemen/lsp-zero.nvim",
-     dependencies = {
-         {'neovim/nvim-lspconfig'},
-         {'williamboman/mason.nvim'},
-         {'williamboman/mason-lspconfig.nvim'},
-         {'hrsh7th/nvim-cmp'},
-         {'hrsh7th/cmp-buffer'},
-         {'hrsh7th/cmp-path'},
-         {'saadparwaiz1/cmp_luasnip'},
-         {'hrsh7th/cmp-nvim-lsp'},
-         {'hrsh7th/cmp-nvim-lua'},
-         {'L3MON4D3/LuaSnip'},
-         {'rafamadriz/friendly-snippets'}
-     },
-    },
+    --{"VonHeikemen/lsp-zero.nvim",
+    -- dependencies = {
+    --     {'neovim/nvim-lspconfig'},
+    --     {'williamboman/mason.nvim'},
+    --     {'williamboman/mason-lspconfig.nvim'},
+    --     {'hrsh7th/nvim-cmp'},
+    --     {'hrsh7th/cmp-buffer'},
+    --     {'hrsh7th/cmp-path'},
+    --     {'saadparwaiz1/cmp_luasnip'},
+    --     {'hrsh7th/cmp-nvim-lsp'},
+    --     {'hrsh7th/cmp-nvim-lua'},
+    --     {'L3MON4D3/LuaSnip'},
+    --     {'rafamadriz/friendly-snippets'}
+    -- },
+    --},
     {"hrsh7th/nvim-cmp"},
     {"hrsh7th/cmp-buffer"},
     {"hrsh7th/cmp-path"},
     {"hrsh7th/cmp-cmdline"},
     {"saadparwaiz1/cmp_luasnip"},
-    {"hrsh7th/cmp-nvim-lsp"},
     {"mfussenegger/nvim-dap"},
     {"mfussenegger/nvim-dap-python"},
     {"rcarriga/nvim-dap-ui"},
