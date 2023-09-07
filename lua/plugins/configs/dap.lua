@@ -3,14 +3,14 @@ local keymap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
 keymap('n', '<leader>dc', ":lua require('dap').continue()<CR>", opts)
--- keymap('n', '<leader>do', require 'dap'.step_over, opts)
--- keymap('n', '<leader>di', require 'dap'.step_into, opts)
--- keymap('n', '<leader>du', require 'dap'.step_out, opts)
+keymap('n', '<leader>do', ":lua require('dap').step_over()<CR>", opts)
+keymap('n', '<leader>di', ":lua require('dap').step_into()<CR>", opts)
+keymap('n', '<leader>du', ":lua require('dap').step_out()<CR>", opts)
 keymap('n', '<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", opts)
--- keymap('n', '<leader>dt', require 'dap'.terminate, opts)
--- keymap('n', '<leader>dk', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
+keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", opts)
+keymap('n', '<leader>dk', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
 keymap('n', '<leader>dm', ":lua require('dapui').toggle()<CR>", opts)
--- keymap('n', '<leader>df', ":lua require('dapui').float_element()<CR>", opts)
+keymap('n', '<leader>df', ":lua require('dapui').float_element()<CR>", opts)
 
 local dap, dapui = require("dap"), require("dapui")
 
