@@ -3,6 +3,23 @@
 ## Architectural drivers
 * This is a standalone repository as it gives the possibility to: change, test and push.
 
+# NVIM shortcuts
+## General
+| Key       | Action                                  |
+|-----------|-----------------------------------------|
+| `"+y`     | copy to OS clipboard                    |
+| `sort i`  | sort lines in a case-insensitive manner |
+
+## Substitution
+```
+:[range]s/search/replace/[flags]
+```
+
+- `range`: (optional) a range of lines to apply the substitution, e.g., `1,5` for lines 1 to 5 or `%` for the entire file.
+- `search`: the string or pattern you want to search for.
+- `replace`: the string you want to replace the search string with.
+- `flags`: (optional) one or more flags to modify the behavior of the substitution, e.g., `g` for global (replace all occurrences in the specified range), `i` for case-insensitive search, `c` for confirming each substitution.
+
 ## LSP
 | Key        | Action                   | 
 |------------|--------------------------|
@@ -48,21 +65,6 @@
 
 ## Telescope
 `:Telescope keymaps`
-
-## Substitution
-```
-:[range]s/search/replace/[flags]
-```
-
-- `range`: (optional) a range of lines to apply the substitution, e.g., `1,5` for lines 1 to 5 or `%` for the entire file.
-- `search`: the string or pattern you want to search for.
-- `replace`: the string you want to replace the search string with.
-- `flags`: (optional) one or more flags to modify the behavior of the substitution, e.g., `g` for global (replace all occurrences in the specified range), `i` for case-insensitive search, `c` for confirm each substitution.
-
-## Copying
-| Key       | Action              |
-|-----------|---------------------|
-| `"+y`     | copy to OS clipboard|
 
 # tmux
 | Key        | Action                  |
