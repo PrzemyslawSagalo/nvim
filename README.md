@@ -15,10 +15,10 @@
 :[range]s/search/replace/[flags]
 ```
 
-- `range`: (optional) a range of lines to apply the substitution, e.g., `1,5` for lines 1 to 5 or `%` for the entire file.
+- `range`: (optional) a range of lines to apply the substitution, e.g., `1,5s` for lines 1 to 5, `.,+10s` for lines from current to 10 down, `%` for the entire file.
 - `search`: the string or pattern you want to search for.
 - `replace`: the string you want to replace the search string with.
-- `flags`: (optional) one or more flags to modify the behavior of the substitution, e.g., `g` for global (replace all occurrences in the specified range), `i` for case-insensitive search, `c` for confirming each substitution.
+- `flags`: (optional) one or more flags to modify the behaviour of the substitution, e.g., `g` for global (replace all occurrences in the specified range), `i` for case-insensitive search, `c` for confirming each substitution.
 
 ## LSP
 | Key        | Action                   | 
