@@ -65,9 +65,3 @@
 
 ## Telescope
 `:Telescope keymaps`
-
-# tmux
-| Key        | Action                  |
-|------------|-------------------------|
-| `Ctrl-b [` | enable scrolling        |
-| `q`        | exit from scroling mode |
