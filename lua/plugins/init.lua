@@ -12,7 +12,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    {"folke/tokyonight.nvim"},
+    {   "bluz71/vim-moonfly-colors",
+        name = "moonfly",
+        lazy = false,
+        priority = 1000
+    },
+    --{
+    --    "folke/tokyonight.nvim",
+    --    lazy = false,
+    --    priority = 1000,
+    --    --config = function() require("tokyonight").setup() end,
+    --    opts = {}
+    --},
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
@@ -74,6 +85,25 @@ local plugins = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim"
+        }
+    },
+    {
+        'cameron-wags/rainbow_csv.nvim',
+        config = true,
+        ft = {
+            'csv',
+            'tsv',
+            'csv_semicolon',
+            'csv_whitespace',
+            'csv_pipe',
+            'rfc_csv',
+            'rfc_semicolon'
+        },
+        cmd = {
+            'RainbowDelim',
+            'RainbowDelimSimple',
+            'RainbowDelimQuoted',
+            'RainbowMultiDelim'
         }
     }
 }
