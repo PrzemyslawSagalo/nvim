@@ -17,13 +17,6 @@ local plugins = {
         lazy = false,
         priority = 1000
     },
-    --{
-    --    "folke/tokyonight.nvim",
-    --    lazy = false,
-    --    priority = 1000,
-    --    --config = function() require("tokyonight").setup() end,
-    --    opts = {}
-    --},
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
@@ -76,17 +69,6 @@ local plugins = {
     },
     {"moll/vim-bbye"},
     {"Civitasv/cmake-tools.nvim"},
-    {
-        "nvim-neotest/neotest",
-        dependencies = {
-            "nvim-neotest/neotest-python",
-            "nvim-neotest/neotest-plenary",
-            "nvim-neotest/neotest-vim-test",
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim"
-        }
-    },
     {
         'cameron-wags/rainbow_csv.nvim',
         config = true,
