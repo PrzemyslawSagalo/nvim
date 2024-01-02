@@ -63,5 +63,13 @@
 | `<S-h>`                | previous buffer                        |
 | `:bwipeout` or `:bw`   | delete and remove a buffer from a list |
 
+## surround
+
+| Key                                | Action                                 |
+|------------------------------------|----------------------------------------|
+| `ys<motion><delimiter>'            | you surround/add                       |
+| `cs<old delimiter><new delimiter>  | change surrounding                     |
+| `ds<delimiter>`                    | delete surrounding                     |
+
 ## Telescope
 `:Telescope keymaps`

@@ -87,6 +87,12 @@ local plugins = {
             'RainbowDelimQuoted',
             'RainbowMultiDelim'
         }
+    },
+    {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts={}
     }
 }
 
