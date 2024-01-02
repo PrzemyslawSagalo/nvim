@@ -92,7 +92,6 @@ local plugins = {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
-    opts={}
     }
 }
 

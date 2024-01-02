@@ -65,11 +65,11 @@
 
 ## surround
 
-| Key                                | Action                                 |
-|------------------------------------|----------------------------------------|
-| `ys<motion><delimiter>'            | you surround/add                       |
-| `cs<old delimiter><new delimiter>  | change surrounding                     |
-| `ds<delimiter>`                    | delete surrounding                     |
+| Key                                | Action              |
+|------------------------------------|---------------------|
+| `ys<motion><delimiter>`            | you surround/add    |
+| `cs<old delimiter><new delimiter>` | change surrounding  |
+| `ds<delimiter>`                    | delete surrounding  |
 
 ## Telescope
 `:Telescope keymaps`
