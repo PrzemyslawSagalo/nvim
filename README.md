@@ -71,5 +71,9 @@
 | `cs<old delimiter><new delimiter>` | change surrounding  |
 | `ds<delimiter>`                    | delete surrounding  |
 
+## treesj
+
+[Commands](https://github.com/Wansmer/treesj?tab=readme-ov-file#commands)
+
 ## Telescope
 `:Telescope keymaps`

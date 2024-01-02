@@ -89,9 +89,13 @@ local plugins = {
         }
     },
     {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+    },
+    {
+        'Wansmer/treesj',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
     }
 }
 
