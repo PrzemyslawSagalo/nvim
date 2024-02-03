@@ -3,6 +3,11 @@
 ## Architectural drivers
 * This is a standalone repository as it gives the possibility to: change, test and push.
 
+## DAP Python
+```
+import pandas as pd; pd.set_option("display.max_rows", 999999); pd.set_option("display.max_columns", 999999); pd.set_option("display.max_colwidth", 999999)
+```
+
 # NVIM shortcuts
 ## General
 | Key       | Action                                  |
