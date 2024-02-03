@@ -10,25 +10,20 @@ keymap('n', '<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", opts)
 keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", opts)
 keymap('n', '<leader>dk', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
 keymap('n', '<leader>dm', ":lua require('dapui').toggle()<CR>", opts)
-keymap('n', '<leader>df', ":lua require('dapui').float_element()<CR>", opts)
+
+-- Floating window
+local screen_width = vim.o.columns
+local screen_height = vim.o.lines
+local floating_window_width = math.floor(screen_width * 0.9)
+local floating_window_height = math.floor(screen_height * 0.9)
+keymap('n', '<leader>df', string.format(":lua require('dapui').float_element(nil, {width = %s, height = %s, enter = true, position = 'center})<CR>", floating_window_width, floating_window_height), opts)
 
 local dap, dapui = require("dap"), require("dapui")
 
 dapui.setup({
     controls = {
         element = "repl",
-        enabled = true,
-        icons = {
-            disconnect = "",
-            pause = "",
-            play = "",
-            run_last = "",
-            step_back = "",
-            step_into = "",
-            step_out = "",
-            step_over = "",
-            terminate = ""
-        }
+        enabled = true
     },
     element_mappings = {},
     expand_lines = true,
