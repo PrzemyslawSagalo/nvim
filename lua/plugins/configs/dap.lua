@@ -16,7 +16,7 @@ local screen_width = vim.o.columns
 local screen_height = vim.o.lines
 local floating_window_width = math.floor(screen_width * 0.9)
 local floating_window_height = math.floor(screen_height * 0.9)
-keymap('n', '<leader>df', string.format(":lua require('dapui').float_element(nil, {width = %s, height = %s, enter = true, position = 'center})<CR>", floating_window_width, floating_window_height), opts)
+keymap('n', '<leader>df', string.format(":lua require('dapui').float_element(nil, {width = %s, height = %s, enter = true, position = 'center'})<CR>", floating_window_width, floating_window_height), opts)
 
 local dap, dapui = require("dap"), require("dapui")
 
