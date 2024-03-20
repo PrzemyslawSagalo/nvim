@@ -16,6 +16,11 @@ import pandas as pd; pd.set_option("display.max_rows", 999999); pd.set_option("d
 | `sort i`  | sort lines in a case-insensitive manner |
 | `:norm A[sign to put]`| put a sign at the end of a line|
 
+## Basic word navigation
+- `w` - Move the cursor to the **beginning** of the **next** word.
+- `b` - Move the cursor to the **beginning** of the **current** or **previous** word.
+- `e` - Move the cursor to the **end** of the **current** or **next** word.
+
 ## Substitution
 ```
 :[range]s/search/replace/[flags]
