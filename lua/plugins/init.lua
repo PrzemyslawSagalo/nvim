@@ -44,7 +44,12 @@ local plugins = {
     {"hrsh7th/cmp-cmdline"},
     {"mfussenegger/nvim-dap"},
     {"mfussenegger/nvim-dap-python"},
-    {"rcarriga/nvim-dap-ui"},
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            {"nvim-neotest/nvim-nio"},
+        },
+    },
     {"theHamsta/nvim-dap-virtual-text"},
     {
         "nvim-telescope/telescope.nvim",
@@ -96,6 +101,11 @@ local plugins = {
     {
         'Wansmer/treesj',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    },
+    {
+      "folke/todo-comments.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = function() require("todo-comments").setup() end
     }
 }
 
