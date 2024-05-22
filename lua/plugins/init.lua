@@ -30,7 +30,12 @@ local plugins = {
     }, --
     -- LSP
     {'williamboman/mason-lspconfig.nvim'},
-    {'neovim/nvim-lspconfig'},
+    {
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            {"ray-x/lsp_signature.nvim"}
+        }
+    },
     {"hrsh7th/cmp-nvim-lsp"},
     {"hrsh7th/cmp-vsnip"},
     {"hrsh7th/vim-vsnip"},
