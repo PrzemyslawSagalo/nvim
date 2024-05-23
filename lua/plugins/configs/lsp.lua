@@ -29,7 +29,7 @@ local status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not status_ok then return end
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-mason_lspconfig.setup({ensure_installed = {'lua_ls', 'pyright', 'clangd', 'bashls'}})
+mason_lspconfig.setup({ensure_installed = {'lua_ls', 'pyright', 'clangd', 'bashls', "kotlin_language_server"}})
 
 lspconfig.bashls.setup({
     capabilities = lsp_capabilities,
@@ -54,3 +54,9 @@ lspconfig.pyright.setup({
 
 lspconfig.clangd.setup({capabilities = lsp_capabilities})
 
+lspconfig.kotlin_language_server.setup({
+    capabilities = lsp_capabilities,
+    on_attach = function(client, bufnr)
+        require('lsp_signature').on_attach()
+    end
+})

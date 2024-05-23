@@ -1,3 +1,8 @@
+require("mason-nvim-dap").setup({
+    ensure_installed = { "python", "kotlin" },
+    automatic_installation = true,
+})
+
 local keymap = vim.api.nvim_set_keymap
 
 local opts = {noremap = true, silent = true}
@@ -64,5 +69,5 @@ function _G.load_project_dap_config()
     end
 end
 
-vim.cmd([[autocmd FileType python,cpp lua load_project_dap_config()]])
+vim.cmd([[autocmd FileType python,cpp,kotlin lua load_project_dap_config()]])
 
