@@ -64,7 +64,16 @@ import pandas as pd; pd.set_option("display.max_rows", 999999); pd.set_option("d
 | `gy`      | copy_absolute_path| copy absolute path to system clipboard                            |
 | `s`       | system_open       | open a file with default system application or a folder with default file manager, using |system_open| option |
 
-## Tabs and Buffers
+## Buffers, Windows and Tabs
+
+### Buffers
+Buffers are in-memory representations of files. When you open a file in Neovim, it is loaded into a buffer.
+
+### Windows
+Windows are views into buffers. You can have multiple windows open at once.
+
+### Tabs
+Tabs are collections of windows. Each tab can have multiple windows open.
 
 | Key                    | Action                                 |
 |------------------------|----------------------------------------|

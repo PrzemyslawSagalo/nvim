@@ -5,7 +5,6 @@ vim.g.copilot_filetypes = {
     html = true,
     markdown = true,
     json = true,
-    yaml = true,
     sh = true,
     zsh = true,
     bash = true,
