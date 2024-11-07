@@ -13,5 +13,7 @@ require("plugins.configs.treesj")
 require("plugins.configs.surround")
 require("plugins.configs.vim_tree")
 require("plugins.configs.codecompanion")
+require("plugins.configs.neotest")
+require("plugins.configs.dotenv")
 
 require("plugins.configs.vim_options")
