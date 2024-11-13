@@ -35,25 +35,4 @@ require("codecompanion").setup({
       })
     end,
   },
-  prompt_library = {
-      ["pytest"] = {
-          strategy = "inline",
-          prompts = {
-              role = "system",
-              content = [[
-              As a Senior Python Developer, generate unit tests. Return only code without description.
-
-              context```
-              Use these rules:
-              * use Python 3.11;
-              * use pytest;
-              * use assertpy; 
-              * test function names should be written in a given-when-then convention without adding comments in the test's code like #Give
-              * use @pytest.fixture whenever it is needed; 
-              * tests should be written as standalone functions
-              ```
-              ]]
-          }
-      }
-  }
 })
