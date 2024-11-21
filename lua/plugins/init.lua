@@ -126,6 +126,7 @@ local plugins = {
       dependencies = { "nvim-lua/plenary.nvim" },
       config = function() require("todo-comments").setup() end
     },
+    -- AI asistants
     {
       "olimorris/codecompanion.nvim",
       dependencies = {
@@ -135,7 +136,8 @@ local plugins = {
         "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
         { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves the default Neovim UI
       },
-    }
+    },
+    {"github/copilot.vim"}
 }
 
 require("lazy").setup(plugins)
