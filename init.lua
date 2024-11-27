@@ -1,6 +1,8 @@
 require("core.general_keymaps")
 
+-- The orther of the require statements is important
 require("plugins.init")
+require("plugins.configs.dotenv")
 require("plugins.configs.autopairs")
 require("plugins.configs.bufferline")
 require("plugins.configs.cmake_tools")
@@ -15,6 +17,5 @@ require("plugins.configs.vim_tree")
 require("plugins.configs.codecompanion")
 require("plugins.configs.copilot")
 require("plugins.configs.neotest")
-require("plugins.configs.dotenv")
 
 require("plugins.configs.vim_options")

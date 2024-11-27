@@ -1,10 +1,12 @@
+local python_utils = require("utils.python_utils")
+
 require("neotest").setup({
     adapters = {
         require("neotest-python")({
-		dap = {justMyCode = false},
 		runner = "pytest",
-		python = "venv/bin/python",
-		}),
+        python = python_utils.python_interpreter_path(),
+		dap = { justMyCode = false},
+	}),
     }
 })
 
