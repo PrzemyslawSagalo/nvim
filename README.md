@@ -22,6 +22,7 @@ import pandas as pd; pd.set_option("display.max_rows", 999999); pd.set_option("d
 - `e` - Move the cursor to the **end** of the **current** or **next** word.
 
 ## Substitution
+### Single file
 ```
 :[range]s/search/replace/[flags]
 ```
@@ -30,6 +31,15 @@ import pandas as pd; pd.set_option("display.max_rows", 999999); pd.set_option("d
 - `search`: the string or pattern you want to search for.
 - `replace`: the string you want to replace the search string with.
 - `flags`: (optional) one or more flags to modify the behaviour of the substitution, e.g., `g` for global (replace all occurrences in the specified range), `i` for case-insensitive search, `c` for confirming each substitution.
+
+### All buffors
+```
+:bufdo %s/ad_endpoint/active_directory/gce | update
+```
+
+- `:bufdo`: Execute the following command in every buffer in the buffer list
+- `gce`: Flags: g - replace all occurrences in each line (global); c - confirm each substitution; e - suppress errors (if pattern not found in some buffers)
+- `update`: Save the file only if it has been modified   
 
 ## LSP
 | Key        | Action                   | 
