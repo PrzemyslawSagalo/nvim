@@ -137,7 +137,16 @@ local plugins = {
         { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves the default Neovim UI
       },
     },
-    {"github/copilot.vim"}
+    {"github/copilot.vim"},
+    -- Python Jupyter Notebook suport
+    {
+      "Vigemus/iron.nvim"
+    },
+    {
+      "GCBallesteros/jupytext.nvim",
+      config = true,
+      lazy = false,
+    }
 }
 
 require("lazy").setup(plugins)

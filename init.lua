@@ -17,5 +17,7 @@ require("plugins.configs.vim_tree")
 require("plugins.configs.codecompanion")
 require("plugins.configs.copilot")
 require("plugins.configs.neotest")
+require("plugins.configs.iron")
+require("plugins.configs.jupytext")
 
 require("plugins.configs.vim_options")
