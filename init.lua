@@ -1,0 +1,23 @@
+require("core.general_keymaps")
+
+-- The orther of the require statements is important
+require("plugins.init")
+require("plugins.configs.dotenv")
+require("plugins.configs.autopairs")
+require("plugins.configs.bufferline")
+require("plugins.configs.cmake_tools")
+require("plugins.configs.colorscheme")
+require("plugins.configs.dap")
+require("plugins.configs.lsp")
+require("plugins.configs.telescope")
+require("plugins.configs.treesitter")
+require("plugins.configs.treesj")
+require("plugins.configs.surround")
+require("plugins.configs.vim_tree")
+require("plugins.configs.codecompanion")
+require("plugins.configs.copilot")
+require("plugins.configs.neotest")
+require("plugins.configs.iron")
+require("plugins.configs.jupytext")
+
+require("plugins.configs.vim_options")
