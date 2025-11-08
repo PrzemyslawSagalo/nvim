@@ -148,6 +148,7 @@ Flags can be combined (e.g., `nu` for numeric unique sort).
 
 " Case-insensitive unique sort
 :%sort ui
+```
 
 ## ⚖️ Licensing
 
