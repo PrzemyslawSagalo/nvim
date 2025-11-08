@@ -1,0 +1,32 @@
+vim.g.copilot_filetypes = {
+    ["*"] = false,
+    lua = true,
+    python = true,
+    html = true,
+    markdown = true,
+    json = true,
+    sh = true,
+    zsh = true,
+    bash = true,
+    vim = true,
+    go = true,
+    rust = true,
+    c = true,
+    cpp = true,
+    kotlin = true,
+    sql = true,
+    yaml = true,
+    groovy = true
+}
+
+vim.cmd [[highlight CopilotSuggestion guifg=#555555 ctermfg=8]]
+
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+
+vim.api.nvim_set_keymap("i", "<C-c>", 'copilot#Accept("<CR>")', {silent = true, expr = true})
+
+vim.keymap.set('i', '<C-w>', '<Plug>(copilot-accept-word)')
+--vim.keymap.set('i', '<C-d', '<Plug>(copilot-dismiss)')
+--vim.keymap.set('i', '<C-[>', '<Plug>(copilot-previous)')
+--vim.keymap.set('i', '<C-]>', '<Plug>(copilot-next)')
