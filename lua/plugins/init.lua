@@ -127,7 +127,19 @@ local plugins = {
       config = function() require("todo-comments").setup() end
     },
     -- AI asistants
-    {"github/copilot.vim"},
+    {
+        "github/copilot.vim"
+    },
+    -- Code structurization
+    {
+      'stevearc/aerial.nvim',
+      opts = {},
+      tag = "v2.6.1",
+      dependencies = {
+         "nvim-treesitter/nvim-treesitter",
+         "nvim-tree/nvim-web-devicons"
+      },
+    }
 }
 
 require("lazy").setup(plugins)
