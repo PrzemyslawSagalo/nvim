@@ -16,5 +16,6 @@ require("plugins.configs.surround")
 require("plugins.configs.vim_tree")
 require("plugins.configs.copilot")
 require("plugins.configs.neotest")
+require("plugins.configs.aerial")
 
 require("plugins.configs.vim_options")
