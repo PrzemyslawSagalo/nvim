@@ -51,6 +51,8 @@ mason_lspconfig.setup({
         "marksman",
         'bashls',
         'clangd',
+        'gitlab-ci-ls',
+        'groovy-language-server',
         'lua_ls',
         'pyright',
     },
