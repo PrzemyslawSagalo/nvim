@@ -1,21 +1,16 @@
 local builtin = require('telescope.builtin')
 
--- Find files in your current working directory, respecting .gitignore
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'It searches for files in the current working directory' })
 
--- Find ALL files, including dotfiles and files in .gitignore (e.g., venv)
 vim.keymap.set('n', '<leader>fa', function()
     builtin.find_files({
         no_ignore = true, -- Don't respect .gitignore
         hidden = true,    -- Show hidden files (dotfiles)
     })
-end, { desc = 'Find All Files' })
+end, { desc = 'iAs same as ff but search also in .* files' })
 
--- Find files tracked by git (super fast and often the most relevant)
-vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'Find Git Files' })
+vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'This limits the search strictly to files currently tracked by the git index.' })
 
--- Live Grep (search for strings in files)
-vim.keymap.set('n', '<leader>ps', function() -- 'ps' for Project Search
-    -- Using the live_grep_args extension to dynamically add arguments
+vim.keymap.set('n', '<leader>ps', function()
     require('telescope').extensions.live_grep_args.live_grep_args()
 end, { desc = 'Project Search (Grep)' })
