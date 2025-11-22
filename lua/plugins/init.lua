@@ -12,11 +12,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    {   "bluz71/vim-moonfly-colors",
-        name = "moonfly",
+    -- Color Theme
+    {
+        "folke/tokyonight.nvim",
         lazy = false,
-        priority = 1000
+        priority = 1000,
+        opts = {},
     },
+    -- 
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
