@@ -19,6 +19,17 @@ local plugins = {
         priority = 1000,
         opts = {},
     },
+    -- Search
+    {
+        "nvim-telescope/telescope.nvim",
+        dependencies = {
+            {"nvim-lua/plenary.nvim"},
+            {"nvim-telescope/telescope-live-grep-args.nvim"}
+        },
+        config = function()
+            require("telescope").load_extension("live_grep_args")
+        end
+    },
     -- 
     {
         "nvim-tree/nvim-tree.lua",
@@ -62,16 +73,6 @@ local plugins = {
     {"hrsh7th/cmp-buffer"},
     {"hrsh7th/cmp-path"},
     {"hrsh7th/cmp-cmdline"},
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            {"nvim-lua/plenary.nvim"},
-            {"nvim-telescope/telescope-live-grep-args.nvim"}
-        },
-        config = function()
-            require("telescope").load_extension("live_grep_args")
-        end
-    },
     {
         "nvim-treesitter/nvim-treesitter",
         cmd = {"TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo"},
