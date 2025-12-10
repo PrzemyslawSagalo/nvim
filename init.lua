@@ -1,4 +1,5 @@
 require("core.general_keymaps")
+require("core.comment")
 
 -- The orther of the require statements is important
 require("plugins.init")
