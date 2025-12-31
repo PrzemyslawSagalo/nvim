@@ -16,7 +16,8 @@ vim.g.copilot_filetypes = {
     kotlin = true,
     sql = true,
     yaml = true,
-    groovy = true
+    groovy = true,
+    rst = true
 }
 
 vim.cmd [[highlight CopilotSuggestion guifg=#555555 ctermfg=8]]
