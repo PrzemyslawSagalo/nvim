@@ -9,8 +9,6 @@ vim.keymap.set('n', '<leader>fa', function()
     })
 end, { desc = 'iAs same as ff but search also in .* files' })
 
-vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'This limits the search strictly to files currently tracked by the git index.' })
-
-vim.keymap.set('n', '<leader>ps', function()
+vim.keymap.set('n', '<leader>fg', function()
     require('telescope').extensions.live_grep_args.live_grep_args()
 end, { desc = 'Project Search (Grep)' })
