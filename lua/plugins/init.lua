@@ -131,9 +131,10 @@ local plugins = {
       config = function() require("todo-comments").setup() end
     },
     -- AI asistants
-    {
-        "github/copilot.vim"
-    },
+    { import = "plugins.configs.zbirenbaum-copilot" },
+--    {
+--        "github/copilot.vim"
+--    },
     -- Code structurization
     {
       'stevearc/aerial.nvim',
