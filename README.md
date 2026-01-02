@@ -10,10 +10,12 @@ import pandas as pd; pd.set_option("display.max_rows", 999999); pd.set_option("d
 
 # NVIM shortcuts
 ## General
-| Key       | Action                                        |
-|-----------|      -----------------------------------------|
-| `"+y`     | copy to OS clipboard                          |
-| `:norm A  [ sign to put]`| put a sign at the end of a line|
+| Key                      | Action                                        |
+|--------------------------|-----------------------------------------------|
+| `"+y`                    | copy to OS clipboard                          |
+| `:norm A  [ sign to put]`| put a sign at the end of a line               |
+| `:verbose imap <key>`    | show which plugin mapped a key in insert mode |
+| `:verbose nmap <key>`    | show which plugin mapped a key in normal mode |
 
 ## Basic word navigation
 - `w` - Move the cursor to the **beginning** of the **next** word.
