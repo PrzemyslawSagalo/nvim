@@ -115,7 +115,7 @@ local plugins = {
       dependencies = {
         "nvim-neotest/nvim-nio",
         "nvim-lua/plenary.nvim",
-	"nvim-neotest/neotest-python",
+	    "nvim-neotest/neotest-python",
         "antoinemadec/FixCursorHold.nvim",
         "nvim-treesitter/nvim-treesitter"
       }
@@ -132,9 +132,7 @@ local plugins = {
     },
     -- AI asistants
     { import = "plugins.configs.zbirenbaum-copilot" },
---    {
---        "github/copilot.vim"
---    },
+    { import = "plugins.configs.avante" },
     -- Code structurization
     {
       'stevearc/aerial.nvim',

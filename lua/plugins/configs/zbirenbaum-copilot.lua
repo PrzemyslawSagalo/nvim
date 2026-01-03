@@ -45,8 +45,6 @@ return {
     },
     config = function(_, opts)
       require("copilot").setup(opts)
-      -- Apply your custom highlight color (#555555)
-      -- We force this to ensure it overrides the theme defaults
       vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#555555", ctermfg = 8, force = true })
     end,
   },
