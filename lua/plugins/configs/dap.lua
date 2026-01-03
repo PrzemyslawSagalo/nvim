@@ -61,7 +61,6 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
 end
 
--- Your existing function definition
 function _G.load_project_dap_config()
   local dap_config_path = vim.fn.getcwd() .. '/dap_config.lua'
   if vim.fn.filereadable(dap_config_path) == 1 then
