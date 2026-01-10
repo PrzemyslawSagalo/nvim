@@ -4,6 +4,7 @@ local non_c_line_comments_by_filetype = {
     lua = "--",
     python = "#",
     sql = "--",
+    sh = "#",
 }
 
 local function comment_out(opts)
