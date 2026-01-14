@@ -47,12 +47,9 @@ end
 
 mason_lspconfig.setup({
     ensure_installed = {
-        "kotlin_language_server",
         "marksman",
         'bashls',
         'clangd',
-        'gitlab-ci-ls',
-        'groovy-language-server',
         'lua_ls',
         'pyright',
     },
