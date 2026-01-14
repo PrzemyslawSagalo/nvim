@@ -73,11 +73,7 @@ local plugins = {
     {"hrsh7th/cmp-buffer"},
     {"hrsh7th/cmp-path"},
     {"hrsh7th/cmp-cmdline"},
-    {
-        "nvim-treesitter/nvim-treesitter",
-        cmd = {"TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo"},
-        build = ":TSUpdate"
-    },
+    { import = "plugins.configs.treesitter" },
     {"Pocco81/auto-save.nvim"},
     {
         "akinsho/bufferline.nvim",
