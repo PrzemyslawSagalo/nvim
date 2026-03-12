@@ -14,6 +14,7 @@ keymap('n', '<leader>du', ":lua require('dap').step_out()<CR>", opts)
 keymap('n', '<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", opts)
 keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", opts)
 keymap('n', '<leader>dk', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
+keymap('n', '<leader>dr', ":lua require('dap').clear_breakpoints()<CR>", opts)
 keymap('n', '<leader>dm', ":lua require('dapui').toggle()<CR>", opts)
 
 -- Floating window
