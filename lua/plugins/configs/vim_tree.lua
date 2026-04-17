@@ -1,24 +1,41 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then return end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then return end
+local function on_attach(bufnr)
+    local api = require('nvim-tree.api')
 
-local tree_cb = nvim_tree_config.nvim_tree_callback
+    local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    -- Default mappings
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- HELP: If you are seeing errors here, it's likely because the API has changed.
+    -- We use pcall to safely set mappings.
+    local function safe_set(mode, lhs, rhs, opt)
+        if rhs then
+            vim.keymap.set(mode, lhs, rhs, opt)
+        end
+    end
+
+    safe_set('n', 'l',     api.node.open.edit,           opts('Open'))
+    safe_set('n', '<CR>',  api.node.open.edit,           opts('Open'))
+    safe_set('n', 'o',     api.node.open.edit,           opts('Open'))
+    safe_set('n', 'h',     api.node.close_node,          opts('Close Node'))
+    safe_set('n', 'v',     api.node.open.vertical,       opts('Open: Vertical Split'))
+end
 
 nvim_tree.setup({
+    on_attach = on_attach,
     disable_netrw = true,
     hijack_netrw = true,
-    ignore_ft_on_setup = {"startify", "dashboard", "alpha"},
-    open_on_tab = false,
     hijack_cursor = false,
-    update_cwd = true,
-    hijack_directories = {enable = true, auto_open = true},
     diagnostics = {
         enable = true,
         icons = {hint = "", info = "", warning = "", error = ""}
     },
-    update_focused_file = {enable = true, update_cwd = true, ignore_list = {}},
+    update_focused_file = {enable = true, ignore_list = {}},
     git = {enable = true, ignore = true, timeout = 500},
     filters = {
         git_ignored = false,
@@ -26,17 +43,7 @@ nvim_tree.setup({
     },
     view = {
         width = 30,
-        height = 30,
-        hide_root_folder = false,
         side = "left",
-        mappings = {
-            custom_only = false,
-            list = {
-                {key = {"l", "<CR>", "o"}, cb = tree_cb "edit"},
-                {key = "h", cb = tree_cb "close_node"},
-                {key = "v", cb = tree_cb "vsplit"}
-            }
-        },
         number = false,
         relativenumber = false
     },
@@ -49,7 +56,7 @@ nvim_tree.setup({
     },
     renderer = {
         highlight_git = true,
-        root_folder_modifier = ":t",
+        root_folder_label = ":t",
         icons = {
             show = {file = true, folder = true, folder_arrow = true, git = true},
             glyphs = {
