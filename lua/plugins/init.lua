@@ -36,7 +36,6 @@ local plugins = {
         version = "*",
         lazy = false,
         --dependencies = {"nvim-tree/nvim-web-devicons"},
-        config = function() require("nvim-tree").setup() end
     }, 
     -- mason
     {
@@ -127,13 +126,11 @@ local plugins = {
       config = function() require("todo-comments").setup() end
     },
     -- AI asistants
-    { import = "plugins.configs.zbirenbaum-copilot" },
-    { import = "plugins.configs.avante" },
+    { "github/copilot.vim" },
     -- Code structurization
     {
       'stevearc/aerial.nvim',
       opts = {},
-      tag = "v2.6.1",
       dependencies = {
          "nvim-treesitter/nvim-treesitter",
          "nvim-tree/nvim-web-devicons"
