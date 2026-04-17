@@ -3,6 +3,7 @@ require("core.comment")
 
 -- The orther of the require statements is important
 require("plugins.init")
+require("plugins.configs.copilot")
 require("plugins.configs.dotenv")
 require("plugins.configs.autopairs")
 require("plugins.configs.bufferline")
