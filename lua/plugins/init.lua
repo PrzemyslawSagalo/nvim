@@ -135,7 +135,8 @@ local plugins = {
          "nvim-treesitter/nvim-treesitter",
          "nvim-tree/nvim-web-devicons"
       },
-    }
+    },
+    { import = "plugins.configs.snacks" },
 }
 
 require("lazy").setup(plugins)
