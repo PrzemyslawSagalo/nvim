@@ -38,6 +38,7 @@ vim.g.copilot_filetypes = {
   rust = true,
   sh = true,
   sql = true,
+  toml = true,
   vim = true,
   yaml = true,
   zsh = true,
