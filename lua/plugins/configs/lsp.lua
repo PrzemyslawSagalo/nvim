@@ -52,6 +52,7 @@ mason_lspconfig.setup({
         'clangd',
         'lua_ls',
         'pyright',
+        "ruff"
     },
     handlers = {
         function(server_name)
@@ -60,5 +61,52 @@ mason_lspconfig.setup({
                 on_attach = on_attach,
             })
         end,
+
+        ["pyright"] = function()
+            lspconfig.pyright.setup({
+                capabilities = lsp_capabilities,
+                on_attach = function(client, bufnr)
+                    on_attach(client, bufnr) -- Keep existing lsp_signature logic
+                    client.server_capabilities.documentFormattingProvider = false
+                    client.server_capabilities.documentRangeFormattingProvider = false
+                end,
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "basic",
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                            diagnosticMode = "workspace",
+                            reportUnreachable = "warning",
+                        }
+                    }
+                }
+            })
+        end,
+
+        ["ruff"] = function()
+            lspconfig.ruff.setup({
+                capabilities = lsp_capabilities,
+                on_attach = function(client, bufnr)
+                    on_attach(client, bufnr) -- Keep existing lsp_signature logic
+                    client.server_capabilities.documentFormattingProvider = false
+                    client.server_capabilities.documentRangeFormattingProvider = false
+                end,
+            })
+        end,
     }
 })
+
+vim.diagnostic.config({
+    virtual_text = {
+        severity = { min = vim.diagnostic.severity.HINT },
+    },
+    signs = {
+        severity = { min = vim.diagnostic.severity.HINT },
+    },
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+})
+
+vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { fg = "#808080", undercurl = true, default = true })
