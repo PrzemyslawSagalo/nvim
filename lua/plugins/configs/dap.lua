@@ -16,6 +16,7 @@ keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", opts)
 keymap('n', '<leader>dk', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
 keymap('n', '<leader>dr', ":lua require('dap').clear_breakpoints()<CR>", opts)
 keymap('n', '<leader>dm', ":lua require('dapui').toggle()<CR>", opts)
+keymap('n', '<leader>dx', ":lua require('dap-python').test_method()<CR>", opts)
 
 -- Floating window
 local screen_width = vim.o.columns
