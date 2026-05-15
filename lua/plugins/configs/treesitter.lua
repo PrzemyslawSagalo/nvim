@@ -5,6 +5,12 @@ return {
     lazy = false,
     build = ":TSUpdate",
     config = function()
+      local install = require("nvim-treesitter.install")
+      
+      -- Force build using system tools
+      install.prefer_git = true
+      install.compilers = { "gcc" }
+
       local status_ok, configs = pcall(require, "nvim-treesitter.configs")
       if not status_ok then
         return
@@ -22,7 +28,6 @@ return {
           "rst",
           "yaml",
         },
-        -- Automatically install missing parsers when entering buffer
         auto_install = true,
         highlight = {
           enable = true,
@@ -32,8 +37,6 @@ return {
           enable = true,
         },
       })
-      -- If tree-sitter CLI is missing, we can try to force use of git
-      require("nvim-treesitter.install").prefer_git = true
     end,
   },
 }
