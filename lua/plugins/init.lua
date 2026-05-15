@@ -105,17 +105,9 @@ local plugins = {
         version = "*",
         event = "VeryLazy",
     },
-    {
-      "nvim-neotest/neotest",
-      dependencies = {
-        "nvim-neotest/nvim-nio",
-        "nvim-lua/plenary.nvim",
-	    "nvim-neotest/neotest-python",
-        "antoinemadec/FixCursorHold.nvim",
-        "nvim-treesitter/nvim-treesitter"
-      }
-    },
+    { import = "plugins.configs.neotest" },
     {"ellisonleao/dotenv.nvim"},
+
     {
         'Wansmer/treesj',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
