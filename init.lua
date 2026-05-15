@@ -15,7 +15,6 @@ require("plugins.configs.telescope")
 require("plugins.configs.treesj")
 require("plugins.configs.surround")
 require("plugins.configs.vim_tree")
-require("plugins.configs.neotest")
 require("plugins.configs.aerial")
 
 require("plugins.configs.vim_options")
