@@ -5,6 +5,8 @@ local non_c_line_comments_by_filetype = {
     python = "#",
     sql = "--",
     sh = "#",
+    jenkinsfile = "//",
+    groovy = "//",
 }
 
 local function comment_out(opts)
