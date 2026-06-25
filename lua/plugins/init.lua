@@ -129,6 +129,7 @@ local plugins = {
       },
     },
     { import = "plugins.configs.snacks" },
+    { import = "plugins.configs.leap" },
 }
 
 require("lazy").setup(plugins)
