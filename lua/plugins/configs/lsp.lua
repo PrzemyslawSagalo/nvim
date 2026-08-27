@@ -5,26 +5,25 @@ cmp.setup({
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
-        end
+        end,
     },
     mapping = {
-        ["<C-k>"] = cmp.mapping.select_prev_item(), -- Move up
-        ["<C-j>"] = cmp.mapping.select_next_item(), -- Move down
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),    -- Scroll info window up
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),     -- Scroll info window down
-        ["<C-Space>"] = cmp.mapping.complete(),     -- Force trigger completion
-        ["<C-e>"] = cmp.mapping.close(),            -- Close completion window
-        ["<CR>"] = cmp.mapping.confirm({            -- Enter to confirm selection
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
-            select = true
-        })
+            select = true,
+        }),
     },
-    -- Sources: Where the completion data comes from (LSP, snippets, current file buffer).
     sources = {
-        { name = 'nvim_lsp' },
+        { name = "nvim_lsp" },
         { name = "vsnip" },
-        { name = "buffer" }
-    }
+        { name = "buffer" },
+    },
 })
 
 local status_lsp, lspconfig = pcall(require, "lspconfig")
@@ -48,11 +47,10 @@ end
 mason_lspconfig.setup({
     ensure_installed = {
         "marksman",
-        'bashls',
-        'clangd',
-        'lua_ls',
-        'pyright',
-        "ruff"
+        "bashls",
+        "clangd",
+        "lua_ls",
+        "ruff",
     },
     handlers = {
         function(server_name)
@@ -61,40 +59,7 @@ mason_lspconfig.setup({
                 on_attach = on_attach,
             })
         end,
-
-        ["pyright"] = function()
-            lspconfig.pyright.setup({
-                capabilities = lsp_capabilities,
-                on_attach = function(client, bufnr)
-                    on_attach(client, bufnr) -- Keep existing lsp_signature logic
-                    client.server_capabilities.documentFormattingProvider = false
-                    client.server_capabilities.documentRangeFormattingProvider = false
-                end,
-                settings = {
-                    python = {
-                        analysis = {
-                            typeCheckingMode = "basic",
-                            autoSearchPaths = true,
-                            useLibraryCodeForTypes = true,
-                            diagnosticMode = "workspace",
-                            reportUnreachable = "warning",
-                        }
-                    }
-                }
-            })
-        end,
-
-        ["ruff"] = function()
-            lspconfig.ruff.setup({
-                capabilities = lsp_capabilities,
-                on_attach = function(client, bufnr)
-                    on_attach(client, bufnr) -- Keep existing lsp_signature logic
-                    client.server_capabilities.documentFormattingProvider = false
-                    client.server_capabilities.documentRangeFormattingProvider = false
-                end,
-            })
-        end,
-    }
+    },
 })
 
 vim.diagnostic.config({
