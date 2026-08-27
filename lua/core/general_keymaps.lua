@@ -79,3 +79,5 @@ keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 -- Diagnostics --
 -- Show diagnostic details in a floating window (hover)
 keymap("n", "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+-- LSP code actions (e.g. Ruff quick fixes, import cleanup)
+keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
