@@ -50,10 +50,8 @@ local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lsp_capabilities = cmp_nvim_lsp.default_capabilities()
 
 local on_attach = function(client, bufnr)
-    local status_sig, lsp_signature = pcall(require, "lsp_signature")
-    if status_sig then
-        lsp_signature.on_attach()
-    end
+    local lsp_signature = require("lsp_signature")
+    lsp_signature.on_attach()
 end
 
 mason_lspconfig.setup({
