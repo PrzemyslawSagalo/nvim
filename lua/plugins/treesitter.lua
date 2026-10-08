@@ -11,9 +11,7 @@ return {
       install.prefer_git = true
       install.compilers = { "gcc" }
 
-      local configs = require("nvim-treesitter.configs")
-
-      configs.setup({
+      require("nvim-treesitter").setup({
         ensure_installed = {
           "bash",
           "c",
