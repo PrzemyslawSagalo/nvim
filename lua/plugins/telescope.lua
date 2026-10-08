@@ -21,9 +21,7 @@ vim.keymap.set('n', '<leader>fg', function()
 end, { desc = 'Project Search (Grep)' })
 
 -- Load extensions
-pcall(function()
-  require("telescope").load_extension("live_grep_args")
-end)
+require("telescope").load_extension("live_grep_args")
 
     end
 }

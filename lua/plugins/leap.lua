@@ -6,11 +6,7 @@ return {
       "tpope/vim-repeat",
     },
     config = function()
-      local status_ok, leap = pcall(require, "leap")
-      if not status_ok then
-        -- fallback silently if require fails
-        return
-      end
+      local leap = require("leap")
 
       -- Explicitly set the correct mapping targets
       vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)', { silent = true, desc = 'Leap forward' })

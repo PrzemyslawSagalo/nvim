@@ -1,11 +1,14 @@
 return {
     "nvim-tree/nvim-tree.lua",
     version = "*",
-    keys = {
-        { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle Explorer" }
+    lazy = false,
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
     },
     config = function()
-local nvim_tree = require("nvim-tree")
+        local nvim_tree = require("nvim-tree")
+        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Explorer", noremap = true, silent = true })
+
 
 local function on_attach(bufnr)
     local api = require('nvim-tree.api')
@@ -17,8 +20,6 @@ local function on_attach(bufnr)
     -- Default mappings
     api.config.mappings.default_on_attach(bufnr)
 
-    -- HELP: If you are seeing errors here, it's likely because the API has changed.
-    -- We use pcall to safely set mappings.
     local function safe_set(mode, lhs, rhs, opt)
         if rhs then
             vim.keymap.set(mode, lhs, rhs, opt)
