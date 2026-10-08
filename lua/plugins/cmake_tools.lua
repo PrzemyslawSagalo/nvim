@@ -1,3 +1,6 @@
+return {
+    "Civitasv/cmake-tools.nvim",
+    config = function()
 require("cmake-tools").setup {
     cmake_command = "cmake",
 
@@ -18,4 +21,7 @@ require("cmake-tools").setup {
         short = {show = true},
         long = {show = true, max_length = 40}
     }
+}
+
+    end
 }

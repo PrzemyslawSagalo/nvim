@@ -1,5 +1,20 @@
-local status_cmp, cmp = pcall(require, "cmp")
-if not status_cmp then return end
+return {
+    {
+        "williamboman/mason.nvim",
+        config = function() require("mason").setup() end
+    },
+    { 'williamboman/mason-lspconfig.nvim' },
+    {
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            "ray-x/lsp_signature.nvim"
+        },
+        keys = {
+            { "<leader>gl", function() vim.diagnostic.open_float() end, desc = "Show diagnostic details" },
+            { "<leader>ca", function() vim.lsp.buf.code_action() end, desc = "LSP Code Action" },
+        },
+        config = function()
+local cmp = require("cmp")
 
 cmp.setup({
     snippet = {
@@ -26,14 +41,11 @@ cmp.setup({
     },
 })
 
-local status_lsp, lspconfig = pcall(require, "lspconfig")
-if not status_lsp then return end
+local lspconfig = require("lspconfig")
 
-local status_mason, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not status_mason then return end
+local mason_lspconfig = require("mason-lspconfig")
 
-local status_cmp_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_cmp_lsp then return end
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 local lsp_capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -75,3 +87,7 @@ vim.diagnostic.config({
 })
 
 vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { fg = "#808080", undercurl = true, default = true })
+
+        end
+    }
+}

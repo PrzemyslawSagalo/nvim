@@ -22,7 +22,7 @@ vim.opt.updatetime = 200
 
 local autoread_group = vim.api.nvim_create_augroup("HyperFastAutoread", { clear = true })
 
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorMoved" }, {
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 	group = autoread_group,
 	desc = "Synchronize file state with disk on focus and movement",
 	callback = function()

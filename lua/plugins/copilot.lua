@@ -1,3 +1,6 @@
+return {
+    "github/copilot.vim",
+    config = function()
 -- Configuration for github/copilot.vim
 -- Replicating keybindings from previous copilot.lua setup
 
@@ -42,4 +45,7 @@ vim.g.copilot_filetypes = {
   vim = true,
   yaml = true,
   zsh = true,
+}
+
+    end
 }

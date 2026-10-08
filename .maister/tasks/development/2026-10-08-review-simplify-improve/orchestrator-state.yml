@@ -1,0 +1,125 @@
+orchestrator:
+  started_phase: phase-8-gate
+  completed_phases:
+  - phase-1
+  - phase-2
+  - phase-5
+  - phase-6
+  - phase-7
+  - phase-8
+  failed_phases: []
+  auto_fix_attempts: {}
+  options:
+    e2e_enabled: false
+    user_docs_enabled: false
+    code_review_enabled: true
+    pragmatic_review_enabled: true
+    reality_check_enabled: true
+    production_check_enabled: true
+    html_output: true
+    mockup_format: html
+  created: 2026-10-08 18:09:29+00:00
+  updated: '2026-10-08T18:39:05Z'
+  task_path: .maister/tasks/development/2026-10-08-review-simplify-improve
+  task_ids: {}
+task:
+  title: "Zr\xF3b przeglad czy da sie cos uprosicc lub poprawi\u0107"
+  description: "Zr\xF3b przeglad czy da sie cos uprosicc lub poprawi\u0107"
+  status: in_progress
+  tags: []
+  priority: medium
+task_context:
+  risk_level: low
+  clarifications_resolved: true
+  scope_expanded: null
+  architecture_decision: null
+  task_characteristics:
+    has_reproducible_defect: false
+    modifies_existing_code: true
+    creates_new_entities: false
+    involves_data_operations: false
+    ui_heavy: false
+  phase_summaries:
+    codebase_analysis:
+      summary: Analyzed modular Neovim configuration structure.
+      key_files:
+      - init.lua
+      - lua/plugins/init.lua
+      primary_language: lua
+      decisions: []
+      risks: []
+      artifacts:
+      - path: analysis/codebase-analysis.md
+        label: Codebase Analysis
+        html: null
+    gap_analysis:
+      summary: The user has requested a general review of the Neovim configuration
+        to identify potential simplifications or improvements.
+      decisions: []
+      risks: []
+      artifacts:
+      - path: analysis/gap-analysis.md
+        label: Gap Analysis
+        html: null
+    specification:
+      summary: Clean up the Neovim configuration by eliminating redundant plugins,
+        optimizing lazy-loading, and standardizing the configuration structure.
+      decisions:
+      - decision: Move plugin configs to lazy.nvim config blocks
+        rationale: Ensures lazy.nvim can appropriately lazy-load plugins instead of
+          forcing startup load.
+      - decision: Relocate vim_options to core
+        rationale: Logical separation of core Neovim options and plugin configurations.
+      - decision: Remove tagbar and popup.nvim
+        rationale: Redundant due to aerial.nvim and plenary.nvim.
+      - decision: Remove custom comment.lua
+        rationale: Neovim 0.10+ native gc commenting makes custom scripts unnecessary.
+      risks: []
+      artifacts:
+      - path: implementation/spec.md
+        label: Specification
+        html: null
+    spec_audit:
+      summary: Specification is mostly compliant but needs adjustments for telescope
+        configs, dap plugin dependencies, and redundant opts.
+      decisions:
+      - decision: Flag config overwrite risk as High
+        rationale: Blindly replacing config blocks will lead to broken functionality.
+      - decision: Flag dap.lua multi-plugin issue as Medium
+        rationale: Assigning the config to just one plugin might lead to loading order
+          bugs.
+      risks:
+      - How should existing config blocks in lua/plugins/init.lua be merged?
+      - Which specific plugin entry should plugins.configs.dap be attached to?
+      artifacts:
+      - path: verification/spec-audit.md
+        label: Specification Audit
+        html: null
+    implementation_plan:
+      summary: 'Broken down into 4 task groups: Core Cleanups, Plugin Pruning, Lazy
+        Loading Refactor, Test Review. 19 steps total.'
+      decisions:
+      - decision: Move plugin logic from init.lua to lua/plugins/init.lua inside config
+          functions
+        rationale: Ensures lazy.nvim can appropriately lazy-load plugins
+      - decision: Merge Telescope extensions into lua/plugins/configs/telescope.lua
+        rationale: Prevents override breakage identified in the audit
+      - decision: Attach DAP config to nvim-dap-ui and use others as dependencies
+        rationale: Resolves 1-to-many plugin configuration ambiguity
+      - decision: Remove opts = {} when replacing with custom config
+        rationale: Prevents dead code and lazy.nvim override issues
+      risks:
+      - DAP dependencies loading order might require further adjustment if nvim-dap-ui
+        fails to orchestrate the loading of dap and mason-nvim-dap
+      artifacts:
+      - path: implementation/implementation-plan.md
+        label: Implementation Plan
+        html: null
+    implementation:
+      summary: Completed all 4 task groups. Code refactored successfully.
+      decisions: []
+      risks: []
+      artifacts:
+      - path: implementation/work-log.md
+        label: Work Log
+        html: null

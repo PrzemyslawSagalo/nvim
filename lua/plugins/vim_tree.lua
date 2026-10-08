@@ -1,5 +1,11 @@
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then return end
+return {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    keys = {
+        { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle Explorer" }
+    },
+    config = function()
+local nvim_tree = require("nvim-tree")
 
 local function on_attach(bufnr)
     local api = require('nvim-tree.api')
@@ -82,3 +88,6 @@ nvim_tree.setup({
         }
     }
 })
+
+    end
+}

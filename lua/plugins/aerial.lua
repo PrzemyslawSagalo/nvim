@@ -1,8 +1,11 @@
-local status_ok, aerial = pcall(require, "aerial")
-
-if not status_ok then
-  return
-end
+return {
+    'stevearc/aerial.nvim',
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons"
+    },
+    config = function()
+local aerial = require("aerial")
 
 aerial.setup({
   -- Priority of backends. If one fails or isn't available, it moves to the next.
@@ -15,3 +18,6 @@ aerial.setup({
 })
 
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+
+    end
+}

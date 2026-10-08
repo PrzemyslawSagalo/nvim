@@ -1,9 +1,19 @@
+return {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+        "nvim-neotest/nvim-nio",
+        "mfussenegger/nvim-dap",
+        "mfussenegger/nvim-dap-python",
+        "jay-babu/mason-nvim-dap.nvim",
+        "theHamsta/nvim-dap-virtual-text"
+    },
+    config = function()
 require("mason-nvim-dap").setup({
     ensure_installed = { "python", "kotlin" },
     automatic_installation = true,
 })
 
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 local opts = {noremap = true, silent = true}
 
@@ -110,3 +120,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     end
   end,
 })
+
+    end
+}
