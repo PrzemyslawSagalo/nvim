@@ -1,5 +1,4 @@
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 local opts = {noremap = true, silent = true}
 local term_opts = {silent = true}
@@ -40,8 +39,6 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<leader>q", ":bd | bprev<CR>", opts)
 
--- Tagbar
-keymap("n", "<F8>", ":TagbarToggle<CR>", opts)
 
 -- Insert --
 -- Press jk fast to enter
@@ -73,11 +70,3 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("t", "<Esc>", "<C-\\><C-N>", term_opts)
 keymap("t", "kj", "<C-\\><C-N>", term_opts)
 
--- Nvimtree
-keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
-
--- Diagnostics --
--- Show diagnostic details in a floating window (hover)
-keymap("n", "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
--- LSP code actions (e.g. Ruff quick fixes, import cleanup)
-keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)

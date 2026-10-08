@@ -1,5 +1,9 @@
-local status_ok, bufferline = pcall(require, "bufferline")
-if not status_ok then return end
+return {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+local bufferline = require("bufferline")
 
 bufferline.setup({
     options = {
@@ -26,3 +30,6 @@ bufferline.setup({
         always_show_bufferline = true
     }
 })
+
+    end
+}
