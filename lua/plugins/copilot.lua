@@ -1,5 +1,12 @@
 return {
     "github/copilot.vim",
+    keys = {
+        { "<C-c>", 'copilot#Accept("\\<CR>")', mode = "i", expr = true, replace_keycodes = false, desc = "Copilot Accept" },
+        { "<C-k>", "<Plug>(copilot-next)", mode = "i", desc = "Copilot Next" },
+        { "<C-j>", "<Plug>(copilot-previous)", mode = "i", desc = "Copilot Previous" },
+        { "<C-w>", "<Plug>(copilot-accept-word)", mode = "i", desc = "Copilot Accept Word" },
+        { "<C-]>", "<Plug>(copilot-dismiss)", mode = "i", desc = "Copilot Dismiss" },
+    },
     config = function()
 -- Configuration for github/copilot.vim
 -- Replicating keybindings from previous copilot.lua setup
@@ -7,21 +14,6 @@ return {
 -- Disable default <Tab> mapping
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
-
--- Keybindings
-local keymap = vim.keymap.set
--- Accept suggestion with <C-c>
-keymap('i', '<C-c>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false,
-  silent = true
-})
-
--- Navigation and other actions
-keymap('i', '<C-k>', '<Plug>(copilot-next)', { silent = true })
-keymap('i', '<C-j>', '<Plug>(copilot-previous)', { silent = true })
-keymap('i', '<C-w>', '<Plug>(copilot-accept-word)', { silent = true })
-keymap('i', '<C-]>', '<Plug>(copilot-dismiss)', { silent = true })
 
 -- Filetype Allowlist
 vim.g.copilot_filetypes = {

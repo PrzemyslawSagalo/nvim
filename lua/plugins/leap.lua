@@ -1,17 +1,16 @@
 return {
   {
     "https://codeberg.org/andyg/leap.nvim",
-    lazy = false,
     dependencies = {
       "tpope/vim-repeat",
     },
+    keys = {
+      { "s", "<Plug>(leap-forward)", mode = { "n", "x", "o" }, desc = "Leap forward" },
+      { "S", "<Plug>(leap-backward)", mode = { "n", "x", "o" }, desc = "Leap backward" },
+      { "gs", "<Plug>(leap-from-window)", mode = { "n", "x", "o" }, desc = "Leap from window" },
+    },
     config = function()
       local leap = require("leap")
-
-      -- Explicitly set the correct mapping targets
-      vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)', { silent = true, desc = 'Leap forward' })
-      vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>(leap-backward)', { silent = true, desc = 'Leap backward' })
-      vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)', { silent = true, desc = 'Leap from window' })
     end,
   },
 }

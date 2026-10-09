@@ -4,6 +4,9 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "nvim-tree/nvim-web-devicons"
     },
+    keys = {
+        { "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
+    },
     config = function()
 local aerial = require("aerial")
 
@@ -16,8 +19,6 @@ aerial.setup({
     vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
   end,
 })
-
-vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
     end
 }

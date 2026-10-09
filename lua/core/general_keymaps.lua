@@ -5,8 +5,6 @@ local term_opts = {silent = true}
 
 -- Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- Modes
 --   normal_mode = "n",
