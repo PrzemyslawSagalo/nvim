@@ -1,13 +1,14 @@
 return {
     "nvim-tree/nvim-tree.lua",
     version = "*",
-    lazy = false,
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
+    keys = {
+        { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle Explorer" }
+    },
     config = function()
         local nvim_tree = require("nvim-tree")
-        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Explorer", noremap = true, silent = true })
 
 
 local function on_attach(bufnr)

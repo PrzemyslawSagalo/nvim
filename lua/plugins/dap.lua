@@ -17,23 +17,23 @@ local keymap = vim.keymap.set
 
 local opts = {noremap = true, silent = true}
 
-keymap('n', '<leader>dc', ":lua require('dap').continue()<CR>", opts)
-keymap('n', '<leader>do', ":lua require('dap').step_over()<CR>", opts)
-keymap('n', '<leader>di', ":lua require('dap').step_into()<CR>", opts)
-keymap('n', '<leader>du', ":lua require('dap').step_out()<CR>", opts)
-keymap('n', '<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", opts)
-keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", opts)
-keymap('n', '<leader>dk', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
-keymap('n', '<leader>dr', ":lua require('dap').clear_breakpoints()<CR>", opts)
-keymap('n', '<leader>dm', ":lua require('dapui').toggle()<CR>", opts)
-keymap('n', '<leader>dx', ":lua require('dap-python').test_method()<CR>", opts)
+keymap('n', '<leader>dc', function() require('dap').continue() end, opts)
+keymap('n', '<leader>do', function() require('dap').step_over() end, opts)
+keymap('n', '<leader>di', function() require('dap').step_into() end, opts)
+keymap('n', '<leader>du', function() require('dap').step_out() end, opts)
+keymap('n', '<leader>db', function() require('dap').toggle_breakpoint() end, opts)
+keymap('n', '<leader>dt', function() require('dap').terminate() end, opts)
+keymap('n', '<leader>dk', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, opts)
+keymap('n', '<leader>dr', function() require('dap').clear_breakpoints() end, opts)
+keymap('n', '<leader>dm', function() require('dapui').toggle() end, opts)
+keymap('n', '<leader>dx', function() require('dap-python').test_method() end, opts)
 
 -- Floating window
 local screen_width = vim.o.columns
 local screen_height = vim.o.lines
 local floating_window_width = math.floor(screen_width * 0.9)
 local floating_window_height = math.floor(screen_height * 0.9)
-keymap('n', '<leader>df', string.format(":lua require('dapui').float_element(nil, {width = %s, height = %s, enter = true, position = 'center'})<CR>", floating_window_width, floating_window_height), opts)
+keymap('n', '<leader>df', function() require('dapui').float_element(nil, {width = floating_window_width, height = floating_window_height, enter = true, position = 'center'}) end, opts)
 
 local dap, dapui = require("dap"), require("dapui")
 
@@ -72,54 +72,6 @@ dapui.setup({
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
 end
-
-function _G.load_project_dap_config()
-  local dap_config_path = vim.fn.getcwd() .. '/dap_config.lua'
-  if vim.fn.filereadable(dap_config_path) == 1 then
-    vim.cmd('luafile ' .. dap_config_path)
-    -- Using vim.notify instead of print for a more robust message
-    vim.notify('Loaded project-specific DAP configuration', vim.log.levels.INFO, { title = 'DAP' })
-  end
-end
-
----
--- Autocommand setup for DAP project config
----
-
--- Create a dedicated augroup to ensure commands are not duplicated on reload
-local dap_project_group = vim.api.nvim_create_augroup('DapProjectConfig', { clear = true })
-
--- It loads the config when you open a relevant file.
-vim.api.nvim_create_autocmd('FileType', {
-  group = dap_project_group,
-  pattern = { 'python', 'cpp', 'kotlin' }, -- Add any other filetypes here
-  desc = 'Load project DAP config on file open',
-  callback = function()
-    if _G.load_project_dap_config then
-      _G.load_project_dap_config()
-    end
-  end,
-})
-
--- It reloads the config when you SAVE the config file itself.
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = dap_project_group,
-  pattern = '*/dap_config.lua', -- Matches the config file in any directory
-  desc = 'Reload project-specific DAP config on save',
-  callback = function()
-    local ok, err = pcall(function()
-      if _G.load_project_dap_config then
-        _G.load_project_dap_config()
-      else
-        vim.notify('DAP: _G.load_project_dap_config function not found', vim.log.levels.WARN)
-      end
-    end)
-
-    if not ok then
-      vim.notify('Failed to reload project DAP config: ' .. tostring(err), vim.log.levels.ERROR)
-    end
-  end,
-})
 
     end
 }
