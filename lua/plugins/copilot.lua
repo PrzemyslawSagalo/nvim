@@ -1,5 +1,6 @@
 return {
     "github/copilot.vim",
+    event = "InsertEnter",
     keys = {
         { "<C-c>", 'copilot#Accept("\\<CR>")', mode = "i", expr = true, replace_keycodes = false, desc = "Copilot Accept" },
         { "<C-k>", "<Plug>(copilot-next)", mode = "i", desc = "Copilot Next" },
