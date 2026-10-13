@@ -1,13 +1,12 @@
 #!/bin/bash
-export XDG_CONFIG_HOME=/home/ec2-user/src
-export XDG_DATA_HOME=/home/ec2-user/.local/share
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/home/ec2-user/src}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 # we will just run the ones in tests/
 FAILURES=0
 
 for test_file in tests/test_*.lua; do
     echo "Running $test_file..."
-    nvim --headless -c "lua dofile('$test_file')" -c "q"
-    if [ $? -ne 0 ]; then
+    if ! nvim --headless -c "lua dofile('$test_file')" -c "q"; then
         echo "FAIL: $test_file"
         FAILURES=$((FAILURES+1))
     fi
