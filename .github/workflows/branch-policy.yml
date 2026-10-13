@@ -128,12 +128,15 @@ jobs:
             PACKAGES+=(shellcheck)
           fi
 
-          if [[ "${{ steps.detect.outputs.is_nvim }}" == "true" || "${{ steps.detect.outputs.has_lua }}" == "true" ]]; then
-            PACKAGES+=(neovim)
-          fi
-
           if [ ${#PACKAGES[@]} -gt 0 ]; then
             sudo apt-get install -y --no-install-recommends "${PACKAGES[@]}"
+          fi
+
+          # Install official modern Neovim release (satisfies modern plugin requirements)
+          if [[ "${{ steps.detect.outputs.is_nvim }}" == "true" || "${{ steps.detect.outputs.has_lua }}" == "true" ]]; then
+            echo "Installing latest stable Neovim..."
+            curl -fsSL https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz | sudo tar -C /usr/local --strip-components=1 -xz
+            nvim --version | head -n 2
           fi
 
           if [[ "${{ steps.detect.outputs.has_python }}" == "true" ]]; then
