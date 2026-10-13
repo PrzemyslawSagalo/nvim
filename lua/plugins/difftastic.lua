@@ -105,19 +105,19 @@ return {
       "DifftFloat",
     },
     keys = {
-      -- AST Buffer Diff Views
-      { "<leader>gdu", "<cmd>Difft<CR>", desc = "Difftastic: Diff Unstaged (Buffer)" },
-      { "<leader>gds", "<cmd>Difft --staged<CR>", desc = "Difftastic: Diff Staged (Buffer)" },
+      -- AST Buffer Split Diff Views (prefixed with <leader>gv for instant 0ms execution)
+      { "<leader>gvu", "<cmd>Difft<CR>", desc = "Difftastic: Split Diff Unstaged" },
+      { "<leader>gvs", "<cmd>Difft --staged<CR>", desc = "Difftastic: Split Diff Staged" },
       {
-        "<leader>gdm",
+        "<leader>gvm",
         function()
           local branch = get_primary_branch()
           vim.cmd("Difft " .. branch .. "...HEAD")
         end,
-        desc = "Difftastic: Review vs Primary Branch (Buffer)",
+        desc = "Difftastic: Split Review vs Primary Branch",
       },
-      { "<leader>gdc", "<cmd>DifftClose<CR>", desc = "Difftastic: Close Diff Views" },
-      { "<leader>gdp", "<cmd>DifftPick<CR>", desc = "Difftastic: Commit Picker" },
+      { "<leader>gvc", "<cmd>DifftClose<CR>", desc = "Difftastic: Close Split Diff Views" },
+      { "<leader>gvp", "<cmd>DifftPick<CR>", desc = "Difftastic: Commit Picker" },
 
       -- High-Speed Floating Review Windows
       {
