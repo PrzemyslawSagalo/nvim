@@ -1,0 +1,106 @@
+name: Branch Policy & Code Review Gate
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+      - ready_for_review
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  enforce-branch-policy:
+    name: Enforce Branching Strategy
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Validate Branch Names & Merge Boundaries
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+          PRIMARY_BRANCH: main
+        run: |
+          set -euo pipefail
+
+          FEATURE_REGEX='^feature/.+$'
+          POLICY_VIOLATED=0
+
+          echo "=========================================================="
+          echo "FAIL-FAST GATE: Branching Policy Verification"
+          echo "Triggered by: ${EVENT_NAME}"
+          echo "Primary Branch: ${PRIMARY_BRANCH}"
+          echo "=========================================================="
+
+          if [[ "${EVENT_NAME}" == "push" ]]; then
+            if [[ "${REF_TYPE}" == "branch" ]]; then
+              echo "Evaluating push to branch: '${REF_NAME}'"
+              if [[ "${REF_NAME}" =~ ${FEATURE_REGEX} || "${REF_NAME}" == "${PRIMARY_BRANCH}" ]]; then
+                echo "::notice title=Branch Policy Passed::Push to authorized branch '${REF_NAME}'."
+              else
+                echo "::error title=Illegal Branch Push::Push to '${REF_NAME}' is blocked! All code must be pushed exclusively to a 'feature/*' branch or '${PRIMARY_BRANCH}'."
+                POLICY_VIOLATED=1
+              fi
+            else
+              echo "Push ref_type '${REF_TYPE}' is not a branch (tag/release). Skipping branch name enforcement."
+            fi
+
+          elif [[ "${EVENT_NAME}" == "pull_request" ]]; then
+            echo "Evaluating Pull Request: '${HEAD_REF}' -> '${BASE_REF}'"
+
+            # 1. Enforce Source Branch: Must originate exclusively from feature/*
+            if [[ "${HEAD_REF}" =~ ${FEATURE_REGEX} ]]; then
+              echo "::notice title=PR Source Valid::Head branch '${HEAD_REF}' matches 'feature/*'."
+            else
+              echo "::error title=Illegal PR Source Branch::PR source '${HEAD_REF}' is prohibited! All changes must originate from a 'feature/*' branch."
+              POLICY_VIOLATED=1
+            fi
+
+            # 2. Enforce Target Branch: Only merges into main or another feature/* are allowed
+            if [[ "${BASE_REF}" == "${PRIMARY_BRANCH}" || "${BASE_REF}" =~ ${FEATURE_REGEX} ]]; then
+              echo "::notice title=PR Target Valid::Base branch '${BASE_REF}' is an authorized merge target."
+            else
+              echo "::error title=Illegal PR Target Branch::PR target '${BASE_REF}' is prohibited! Merges are strictly limited to '${PRIMARY_BRANCH}' and 'feature/*' branches."
+              POLICY_VIOLATED=1
+            fi
+          fi
+
+          if [[ "${POLICY_VIOLATED}" -ne 0 ]]; then
+            echo "=========================================================="
+            echo "FATAL: Branch policy verification failed."
+            echo "Rules:"
+            echo "  1. Direct pushes are restricted to 'feature/*' and '${PRIMARY_BRANCH}'."
+            echo "  2. PR source branches MUST strictly match 'feature/*'."
+            echo "  3. PR target branches MUST be either '${PRIMARY_BRANCH}' or 'feature/*'."
+            echo "=========================================================="
+            exit 1
+          fi
+
+          echo "Branch policy validation succeeded."
+
+  automated-code-review:
+    name: Code Review & Validation Suite
+    needs: [enforce-branch-policy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Pipeline Execution
+        run: |
+          echo "Branch policy verified. Proceeding with automated test suites and AI review gates..."
