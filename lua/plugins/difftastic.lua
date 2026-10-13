@@ -1,46 +1,107 @@
 -- lua/plugins/difftastic.lua
 local M = {}
 
----Detects the default primary branch (main or master)
+---Detects the default primary branch (main or master) using git rev-parse
 ---@return string
 local function get_primary_branch()
-  local handle = io.popen("git rev-parse --verify main >/dev/null 2>&1 && echo 'main' || echo 'master'")
-  if handle then
-    local result = handle:read("*a")
-    handle:close()
-    return vim.trim(result)
+  -- Check for existence of 'main' first, fallback to 'master', or default to 'main'
+  local lines = vim.fn.systemlist("git rev-parse --verify main >/dev/null 2>&1 && echo main || echo master")
+  if vim.v.shell_error == 0 and lines and #lines > 0 and lines[1] ~= "" then
+    return vim.trim(lines[1])
   end
   return "main"
 end
 
----Spawns a floating terminal running difftastic against git diff targets
----@param args string Git diff arguments (e.g., "--staged", "main...HEAD", "%")
----@param title string Window title
-local function open_difftastic_float(args, title)
-  if vim.fn.executable("difft") == 0 then
-    vim.notify("difftastic executable ('difft') not found in PATH.", vim.log.levels.ERROR)
-    return
+---Finds the top-level repository root directory using git rev-parse
+---@return string|nil
+local function get_git_root()
+  -- Reliable git root detection via 'git rev-parse --show-toplevel'
+  local lines = vim.fn.systemlist("git rev-parse --show-toplevel")
+  if vim.v.shell_error ~= 0 or not lines or #lines == 0 or lines[1] == "" then
+    return nil
   end
+  return vim.trim(lines[1])
+end
 
-  local git_root = vim.fs.root(0, ".git")
-  if not git_root then
-    vim.notify("Not inside a Git repository.", vim.log.levels.WARN)
-    return
-  end
+---Parses an argument string or table into tokens, safely expanding '%' to absolute current file path
+---@param raw_args string|table
+---@return table|nil tokens List of parsed argument strings, or nil on expansion error
+local function parse_diff_args(raw_args)
+  local tokens = {}
 
-  -- Resolve file argument if '%' is passed
-  local resolved_args = args
-  if args:match("%%") then
-    local current_file = vim.fn.expand("%")
-    if current_file == "" then
-      vim.notify("Current buffer has no file path.", vim.log.levels.WARN)
-      return
+  if type(raw_args) == "table" then
+    for _, arg in ipairs(raw_args) do
+      if arg == "%" then
+        local current_file = vim.fn.expand("%:p")
+        if current_file == "" then
+          vim.notify("Current buffer has no valid file path.", vim.log.levels.WARN)
+          return nil
+        end
+        table.insert(tokens, current_file)
+      elseif type(arg) == "string" and arg:match("%%") then
+        local current_file = vim.fn.expand("%:p")
+        if current_file == "" then
+          vim.notify("Current buffer has no valid file path.", vim.log.levels.WARN)
+          return nil
+        end
+        table.insert(tokens, (arg:gsub("%%", current_file)))
+      else
+        table.insert(tokens, tostring(arg))
+      end
     end
-    resolved_args = args:gsub("%%", vim.fn.shellescape(current_file))
+  elseif type(raw_args) == "string" then
+    for token in raw_args:gmatch("%S+") do
+      if token == "%" then
+        local current_file = vim.fn.expand("%:p")
+        if current_file == "" then
+          vim.notify("Current buffer has no valid file path.", vim.log.levels.WARN)
+          return nil
+        end
+        table.insert(tokens, current_file)
+      elseif token:match("%%") then
+        local current_file = vim.fn.expand("%:p")
+        if current_file == "" then
+          vim.notify("Current buffer has no valid file path.", vim.log.levels.WARN)
+          return nil
+        end
+        table.insert(tokens, (token:gsub("%%", current_file)))
+      else
+        table.insert(tokens, token)
+      end
+    end
   end
 
-  -- Construct command with ANSI color enforcement
-  local cmd = string.format("GIT_EXTERNAL_DIFF='difft --color=always' git diff %s", resolved_args)
+  return tokens
+end
+
+---Spawns a floating terminal running difftastic against git diff targets using array/list command invocation
+---@param raw_args string|table Git diff arguments (e.g., "--staged", "main...HEAD", "%")
+---@param title string Window title
+local function open_difftastic_float(raw_args, title)
+  if vim.fn.executable("difft") == 0 then
+    vim.notify(
+      "difftastic executable ('difft') not found; install difft from https://github.com/Wilfred/difftastic",
+      vim.log.levels.ERROR
+    )
+    return
+  end
+
+  local git_root = get_git_root()
+  if not git_root then
+    vim.notify("Not inside a Git repository (git rev-parse failed)", vim.log.levels.WARN)
+    return
+  end
+
+  local parsed_tokens = parse_diff_args(raw_args)
+  if not parsed_tokens then
+    return
+  end
+
+  -- Safe list-form command structure to prevent shell interpolation/injection
+  local cmd = { "git", "diff" }
+  for _, token in ipairs(parsed_tokens) do
+    table.insert(cmd, token)
+  end
 
   local width = math.floor(vim.o.columns * 0.92)
   local height = math.floor(vim.o.lines * 0.88)
@@ -60,11 +121,15 @@ local function open_difftastic_float(args, title)
     title_pos = "center",
   })
 
-  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
+  vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
 
-  local job_id = vim.fn.termopen(cmd, {
+  -- Use termopen in array/list form with explicit environment variables (ensures ANSI colors)
+  vim.fn.termopen(cmd, {
     cwd = git_root,
-    on_exit = function(_, exit_code)
+    env = {
+      GIT_EXTERNAL_DIFF = "difft --color=always",
+    },
+    on_exit = function()
       if vim.api.nvim_win_is_valid(win) then
         vim.api.nvim_win_close(win, true)
       end
@@ -159,7 +224,7 @@ return {
     config = function(_, opts)
       require("difftastic-nvim").setup(opts)
 
-      -- User command for custom git diff targets
+      -- User command for custom git diff targets (e.g. :DifftFloat HEAD~1 or :DifftFloat %)
       vim.api.nvim_create_user_command("DifftFloat", function(input)
         local args = input.args or ""
         local title = args ~= "" and args or "Working Tree"

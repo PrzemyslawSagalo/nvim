@@ -152,6 +152,61 @@ Flags can be combined (e.g., `nu` for numeric unique sort).
 :%sort ui
 ```
 
+## Difftastic Integration
+
+Structural, syntax-aware AST diff viewer powered by [Difftastic](https://github.com/Wilfred/difftastic) with both side-by-side buffer splits and zero-overhead floating terminal inspectors.
+
+### Requirements
+- **Difftastic CLI**: `difft` executable installed in `$PATH` (`brew install difftastic` or `cargo install --locked difftastic`).
+- **Neovim**: Version `>= 0.10` (recommended: `>= 0.11`).
+- **Dependencies**:
+  - `MunifTanjim/nui.nvim` (UI components)
+  - `folke/snacks.nvim` (Commit/revision picker integration)
+
+### Installation
+Add the plugin spec to your `lazy.nvim` plugin directory (e.g., `lua/plugins/difftastic.lua`):
+
+```lua
+return {
+  {
+    "clabby/difftastic.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "folke/snacks.nvim" },
+    -- Spec automatically configured in lua/plugins/difftastic.lua
+  }
+}
+```
+
+### Commands and Keymaps
+
+| Keymap | Mode | Action | Scope / Target |
+| :--- | :--- | :--- | :--- |
+| `<leader>gd` | Normal | Floating Review | Working tree (unstaged modifications) |
+| `<leader>gD` | Normal | Floating Review | Staged changes (`git diff --staged`) |
+| `<leader>gf` | Normal | Floating Review | Current buffer file only (`%` resolved to absolute path) |
+| `<leader>gm` | Normal | Floating Review | Branch review vs primary branch (`main...HEAD` / `master...HEAD`) |
+| `q` / `<Esc>` | Terminal/Normal | Close Float | Closes floating review window and wipes buffer |
+| `<leader>gvu` | Normal | Side-by-Side Split | Unstaged changes in native editor buffers (`:Difft`) |
+| `<leader>gvs` | Normal | Side-by-Side Split | Staged changes in native editor buffers (`:Difft --staged`) |
+| `<leader>gvm` | Normal | Side-by-Side Split | Branch vs primary branch in native editor buffers |
+| `<leader>gvc` | Normal | Close Splits | Closes active Difftastic editor splits (`:DifftClose`) |
+| `<leader>gvp` | Normal | Revision Picker | Opens revision picker modal (`:DifftPick`) |
+
+#### Custom User Command
+* `:DifftFloat [args]` — Opens the floating terminal with custom arguments (e.g., `:DifftFloat HEAD~2`, `:DifftFloat %`, `:DifftFloat v1.0.0...v2.0.0`).
+
+### Architecture & Execution Flow
+1. **Repository Root Detection**: Resolves root path via `git rev-parse --show-toplevel` executed with `vim.fn.systemlist`. If the command fails, it notifies the user and aborts safely.
+2. **Primary Branch Resolution**: Checks for `main` via `git rev-parse --verify main`, falling back to `master`, or defaulting to `main`.
+3. **Shell-Safe Execution**: Arguments are parsed into token arrays where `%` expands to the absolute file path (`vim.fn.expand("%:p")`). `vim.fn.termopen` executes Git using the list form (`{"git", "diff", ...}`) to bypass shell interpolation.
+4. **ANSI Color Rendering**: Sets `GIT_EXTERNAL_DIFF="difft --color=always"` inside `termopen`'s process environment to retain full 24-bit syntax highlighting.
+5. **Window Lifecycle**: Centers a rounded floating terminal window (92% width, 88% height), sets `bufhidden = "wipe"`, and cleans up windows safely upon process termination or `q` keypress.
+*Assumptions: Primary branch is `main` or `master`. Git worktrees are not specially handled.*
+
+### Troubleshooting
+* **`difftastic executable ('difft') not found`**: Ensure `difft` is installed and accessible in `$PATH`. Verify with `!which difft` inside Neovim.
+* **`Not inside a Git repository (git rev-parse failed)`**: Ensure the current active buffer belongs to an initialized Git repository.
+* **Large Repositories / High-Volume Diffs**: For large multi-file diffs, use `<leader>gf` to inspect the current file individually, or use `:DifftFloat -- path/to/dir` to scope the diff path.
+
 ## ⚖️ Licensing
 
 The materials in this repository are subject to two different licenses. Please read the terms carefully.
