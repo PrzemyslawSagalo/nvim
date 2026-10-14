@@ -5,6 +5,9 @@ return {
             indent = {
                 enable = true,
             },
+            picker = {
+                enabled = true,
+            },
         }
     }
 }
