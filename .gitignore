@@ -40,6 +40,9 @@ Session.vim
 # -----------------------------------------------------------------------------
 # Plugin Manager & Tool Artifacts
 # -----------------------------------------------------------------------------
+# Lazy.nvim
+lazy-lock.json
+
 # Packer
 packer_compiled.lua
 
