@@ -1,5 +1,7 @@
 # NVIM CONFIGURATION
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Architectural drivers
 * This is a standalone repository as it gives the possibility to: change, test and push.
 
@@ -151,3 +153,7 @@ Flags can be combined (e.g., `nu` for numeric unique sort).
 " Case-insensitive unique sort
 :%sort ui
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
