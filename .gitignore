@@ -64,4 +64,11 @@ packer_compiled.lua
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# -----------------------------------------------------------------------------
+# Maister Framework & Task Artifacts
+# -----------------------------------------------------------------------------
 .maister/
+.masiter/
+*maister*
+*masiter*
