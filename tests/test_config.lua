@@ -28,4 +28,8 @@ assert_test(package.loaded["core.autocmds"], "core.autocmds not loaded")
 assert_test(package.loaded["core.vim_options"], "core.vim_options not loaded")
 assert_test(package.loaded["core.general_keymaps"], "core.general_keymaps not loaded")
 
+-- Test 5: autoread and updatetime options
+assert_test(vim.o.autoread == true, "vim.o.autoread is not true")
+assert_test(vim.o.updatetime == 200, "vim.o.updatetime is not 200")
+
 print("All config refactoring tests passed.")

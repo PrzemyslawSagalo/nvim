@@ -15,6 +15,17 @@ Personal Neovim configuration built for modern development, structured testing, 
 * `lua/plugins/` - Modular plugin specifications.
 * `tests/` - Headless Neovim test harnesses validating plugin specifications and contracts.
 
+## Terminal & Tmux Integration
+
+When running Neovim inside tmux, terminal multiplexers suppress focus event escape sequences by default. To enable automatic buffer reload (`FocusGained`) when switching between tmux panes and windows, ensure focus events are enabled in your `~/.tmux.conf`:
+
+```tmux
+# Enable focus event reporting for terminal focus tracking in Neovim
+set -g focus-events on
+```
+
+Reload tmux configuration with `tmux source-file ~/.tmux.conf` or `prefix + r`.
+
 ## Cheat Sheet & Keymaps Reference
 General Vim shortcuts, search & substitution patterns, multi-buffer commands, sorting flags, and plugin keybindings have been migrated to Vergilii:
 * [Vergilii - Vim / Neovim Cheat Sheet](https://github.com/PrzemyslawSagalo/vergilii/blob/main/cheat_sheets/vim.md)
